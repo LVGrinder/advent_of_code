@@ -19,13 +19,7 @@ list_rucksack = []
 for rucksack in supplies:
     list_rucksack.append(rucksack)
 
-
-    half_len = int(len(rucksack) / 2)
-
-    #compartment_first = rucksack[:int(sum([len(rucksack) / 2]))]
-    #compartment_last = rucksack[int(sum([len(rucksack) / 2])):]
-    compartment_first = rucksack[:half_len]
-    compartment_last = rucksack[half_len:]
+    
 
     #print(compartment_first)
     #print(compartment_last)
