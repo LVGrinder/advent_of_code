@@ -18,7 +18,8 @@ file = open("advent_of_code_2022\day2\input.txt", "r+")
 output = file.read()
 file.close()
 
-def round(player1, player2):
+# Returning values from round
+def do_round(player1, player2):
     if player1 == "Y" and player2 == "A":
         return draw + rock
     if player1 == "Y" and player2 == "B":
@@ -41,9 +42,12 @@ def round(player1, player2):
     raise ValueError("Invalid choice")
     
 
-my_points += round(me, opponent)
+for round in output.split("\n"):
+    if (round == ""):
+        print("Warning: emptly line")
+        continue
 
-#print(my_points)
-
-print(output)
-
+    print(do_round(round[2], round[0]))
+    my_points += do_round(me, opponent)
+    
+    

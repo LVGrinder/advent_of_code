@@ -10,10 +10,10 @@ elves = output.split("\n\n")
 
 carb_sums = []
 
-for i in range(len(elves)):
+for elf in elves:
     #print(i, spliitedOutput[i])
 
-    elf = elves[i].split("\n")
+    elf = elf.split("\n")
 
     elf = list(map(int, elf))
 
