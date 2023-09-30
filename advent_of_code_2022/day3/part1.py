@@ -31,14 +31,18 @@ for rucksack in supplies:
     
     for f_item in compartment_first:
         #print("Now checking if", f_item, "is in", compartment_last)
-        for l_item in compartment_last:
-            #print("checking", l_item)
-            if l_item == f_item:
-                for kvp in priorities:
-                    priority = kvp[0]
-                    letter = kvp[1]
-                    if letter == l_item:
-                        #print(priority, l_item)
-                        list_value.append(priority)
+        if compartment_last.__contains__(f_item):
+            for kvp in priorities:
+                priority = kvp[0]
+                letter = kvp[1]
+                if letter == f_item:
+                    print(priority, f_item)
+                    list_value.append(priority)
+                    print(compartment_first, "", compartment_last)
+                    break
+            else:
+                continue
+            break
+                
 
 print(sum(list_value))
