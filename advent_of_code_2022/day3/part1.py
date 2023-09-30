@@ -4,7 +4,9 @@ file = open("advent_of_code_2022\day3\input.txt", "r+")
 output = file.read()
 file.close()
 
-print(output)
+supplies = output.split("\n")
+
+list_rucksack = []
 
 priority = []
 
@@ -14,4 +16,24 @@ alphabet = alphabet.split(" ")
 for i in range(len(alphabet)):
     priority.append([i, alphabet[i]])
 
-print(priority) 
+
+for rucksack in supplies:
+
+
+    list_rucksack.append(rucksack)
+
+
+    # This with list slicing
+    # (len(rucksack) / 2)
+    length_rucksack = [len(rucksack) / 2]
+    #compartment_first = ([len(rucksack) / 2])
+    #compartment_first = int(sum(compartment_first))
+    #compartment_last = rucksack[:[sum(length_rucksack)]]
+    compartment_last = rucksack[:int(sum([len(rucksack) / 2]))]
+
+    print(list_rucksack)
+    #print(compartment_first)
+    print(compartment_last)
+
+    break
+
