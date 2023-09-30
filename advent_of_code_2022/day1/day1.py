@@ -1,4 +1,4 @@
-file = open("input.txt", "r+")
+file = open("advent_of_code_2022\day1\input.txt", "r+")
 output = file.read()
 file.close()
 
