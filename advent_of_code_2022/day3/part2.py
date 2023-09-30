@@ -16,29 +16,40 @@ for i in range(len(alphabet)):
 list_value = []
 list_item = []
 list_rucksack = []
+check_group = 0
+elf_group = []
+find_group = []
+amount = 0
 for rucksack in supplies:
     list_rucksack.append(rucksack)
 
+    check_group += 1 
+
     
+    if check_group == 3:
+        #print("checking")
+        check_group = 0
+        amount += 1
+        for f_item in rucksack:
+            #print(list(list_rucksack[0]))
+            if f_item in list(list_rucksack[0]) and list(list_rucksack[1]) and list(list_rucksack[2]):
+               # if f_item in list_rucksack[1].split():
+                #    if f_item in list_rucksack[2].split():
+                        print(amount, f_item)
+                        list_rucksack = []
+                        for kvp in priorities:
+                            priority = kvp[0]
+                            letter = kvp[1]
 
-    #print(compartment_first)
-    #print(compartment_last)
-    
+                            if letter == f_item:
+                                print(f_item)
+                                #print(priority, f_item)
+                                #list_item.append(f_item)
+                                #list_value.append(priority)
+                                #print()
 
-    for f_item in compartment_first:
-        #print("Now checking if", f_iem, "is in", compartment_last)
-        if f_item in compartment_last:
-            for kvp in priorities:
-                priority = kvp[0]
-                letter = kvp[1]
-                if letter == f_item:
-                    print(priority, f_item)
-                    list_item.append(f_item)
-                    list_value.append(priority)
-                    print(compartment_first, "", compartment_last)
-
-                    
-                    break
+                                print(find_group)
+                                break
             else:
                 continue
             break
