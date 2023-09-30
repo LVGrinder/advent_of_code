@@ -6,34 +6,39 @@ file.close()
 
 supplies = output.split("\n")
 
-list_rucksack = []
-
-priority = []
-
-alphabet = "0 a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
+alphabet = "a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
 alphabet = alphabet.split(" ")
 
+priorities = []
 for i in range(len(alphabet)):
-    priority.append([i, alphabet[i]])
+    priorities.append([i + 1, alphabet[i]])
 
-
+list_value = []
+list_rucksack = []
 for rucksack in supplies:
-
-
     list_rucksack.append(rucksack)
 
 
-    # This with list slicing
-    # (len(rucksack) / 2)
-    length_rucksack = [len(rucksack) / 2]
-    #compartment_first = ([len(rucksack) / 2])
-    #compartment_first = int(sum(compartment_first))
-    #compartment_last = rucksack[:[sum(length_rucksack)]]
-    compartment_last = rucksack[:int(sum([len(rucksack) / 2]))]
+    half_len = int(len(rucksack) / 2)
 
-    print(list_rucksack)
+    #compartment_first = rucksack[:int(sum([len(rucksack) / 2]))]
+    #compartment_last = rucksack[int(sum([len(rucksack) / 2])):]
+    compartment_first = rucksack[:half_len]
+    compartment_last = rucksack[half_len:]
+
     #print(compartment_first)
-    print(compartment_last)
+    #print(compartment_last)
+    
+    for f_item in compartment_first:
+        #print("Now checking if", f_item, "is in", compartment_last)
+        for l_item in compartment_last:
+            #print("checking", l_item)
+            if l_item == f_item:
+                for kvp in priorities:
+                    priority = kvp[0]
+                    letter = kvp[1]
+                    if letter == l_item:
+                        #print(priority, l_item)
+                        list_value.append(priority)
 
-    break
-
+print(sum(list_value))
