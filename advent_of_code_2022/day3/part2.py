@@ -33,9 +33,6 @@ for rucksack in supplies:
         for f_item in rucksack:
             #print(list(list_rucksack[0]))
             if f_item in list(list_rucksack[0]) and list(list_rucksack[1]) and list(list_rucksack[2]):
-               # if f_item in list_rucksack[1].split():
-                #    if f_item in list_rucksack[2].split():
-                        #print(amount, f_item)
                 list_rucksack = []
                 for kvp in priorities:
                     priority = kvp[0]
