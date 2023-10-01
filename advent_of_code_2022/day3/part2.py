@@ -17,8 +17,6 @@ list_value = []
 list_item = []
 list_rucksack = []
 check_group = 0
-elf_group = []
-find_group = []
 amount = 0
 for rucksack in supplies:
     list_rucksack.append(rucksack)
@@ -30,26 +28,30 @@ for rucksack in supplies:
         #print("checking")
         check_group = 0
         amount += 1
-        for f_item in rucksack:
+        for f_item in list(list_rucksack[0]):
             #print(list(list_rucksack[0]))
-            if f_item in list(list_rucksack[0]) and list(list_rucksack[1]) and list(list_rucksack[2]):
-                list_rucksack = []
-                for kvp in priorities:
-                    priority = kvp[0]
-                    letter = kvp[1]
-                    if letter == f_item:
-                        print(priority, f_item, amount)
-                        list_item.append(f_item)
-                        list_value.append(priority)
-                        #print()
-
-                        #print(find_group)
-                        break
-                else:
+            if f_item in list(list_rucksack[1]):
+                #print(list(list_rucksack[1]))
+                if f_item in list(list_rucksack[2]):
+                    #print(list(list_rucksack[2]))
+                    for kvp in priorities:
+                        priority = kvp[0]
+                        letter = kvp[1]
+                        if letter == f_item:
+                            print(priority, f_item, amount)
+                            list_item.append(f_item)
+                            list_value.append(priority)
+                            #print()
+                            list_rucksack = []
+                            #print(find_group)
+                            break
+                else: 
                     continue
-                break
-
+            
+            else: 
+                continue
+            break
+                
     
                 
-print(list_value, list_item)
 print(sum(list_value))
