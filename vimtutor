@@ -402,7 +402,7 @@ NOTE: Remember that you should be learning by doing, not memorization.
 
   5. Repeat steps 3 and 4 until the first sentence is the same as the second.
 
----> This lubw has a few wptfd that mrrf changing usf the change operator.
+---> This line has a few words that need changing using the change operator.
 ---> This line has a few words that need changing using the change operator.
 
 Notice that  ce  deletes the word and places you in Insert mode.
@@ -427,7 +427,7 @@ Notice that  ce  deletes the word and places you in Insert mode.
 
   5. Type  c$  and type the rest of the line like the second and press <ESC>.
 
----> The end of this line needs some help to make it like the second.
+---> The end of this line needs to be corrected using the  c$  command.
 ---> The end of this line needs to be corrected using the  c$  command.
 
 NOTE:  You can use the Backspace key to correct mistakes while typing.
@@ -497,7 +497,7 @@ NOTE:  You may see the cursor position in the lower right corner of the screen
   5. To go back to where you came from press  CTRL-O  (Keep Ctrl down while
      pressing the letter o).  Repeat to go back further.  CTRL-I goes forward.
 
---->  "errroor" is not the way to spell error;  errroor is an error.
+--->  "error" is not the way to spell error;  errroor is an error.
 NOTE: When the search reaches the end of the file it will continue at the
       start, unless the 'wrapscan' option has been reset.
 
@@ -538,7 +538,7 @@ NOTE: This is very useful in debugging a program with unmatched parentheses!
   3. Now type  :s/thee/the/g .  Adding the  g  flag means to substitute
      globally in the line, change all occurrences of "thee" in the line.
 
----> thee best time to see thee flowers is in thee spring.
+---> the best time to see the flowers is in the spring.
 
   4. To change every occurrence of a character string between two lines,
      type   :#,#s/old/new/g    where #,# are the line numbers of the range
