@@ -11,7 +11,6 @@ cratelist = []
 crategroup = 1
 for _ in range(9):
     cratelist.append([])
-print(cratelist)
 for row in crates:
     # print(row)
     # row = row.split()
@@ -22,5 +21,5 @@ for row in crates:
             break
         else:
             cratelist[i // 4].append(row[i + 1])
-    print(cratelist)
-print(cratelist[1])
+    # print(cratelist)
+print(cratelist)
