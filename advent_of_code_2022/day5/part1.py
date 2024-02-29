@@ -7,11 +7,20 @@ instructions = lines[9:]
 
 # print(instructions)
 
-amount = 1
+cratelist = []
+crategroup = 1
+for _ in range(9):
+    cratelist.append([])
+print(cratelist)
 for row in crates:
-    amount += 1
-    print(row)
+    # print(row)
     # row = row.split()
     # print(row)
     for i in range(0, len(row), 4):
-        print(row[i + 1])
+        # print(row[i + 1])
+        if row[i + 1] == " ":
+            break
+        else:
+            cratelist[i // 4].append(row[i + 1])
+    print(cratelist)
+print(cratelist[1])
