@@ -1,7 +1,7 @@
 with open("input.txt", "r+") as f:
     lines = f.readlines()
 
-crates = lines[:9]
+crates = lines[:8]
 
 instructions = lines[9:]
 
