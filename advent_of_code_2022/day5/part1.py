@@ -51,18 +51,16 @@ def parseRowToInstruct(row: str) -> Instruct | None:
 
 
 for row in instructions:
-    print("row: " + row)
-    instruct = Instruct()
-    instruct.process(row)
-    amount = int(-1 + instruct.amount)
-    crate = int(-1 + instruct.crate)
 
-    print("amount: " + str(amount))
+    instruct: Instruct | None = parseRowToInstruct(row)
 
-    print("crate: " + str(crate))
-    for i in range(amount):
-        item_to_move = cratelist[crate].pop()
-        cratelist[instruct.move_to].insert(0, item_to_move)
+    if instruct is not None:
+        print("row: " + row)
+        print("amount: " + str(Instruct.amount))
+        print("crate: " + str(Instruct.crate))
+        for i in range(Instruct.amount):
+            item_to_move = cratelist[Instruct.crate].pop()
+            cratelist[Instruct.move_to].insert(0, item_to_move)
 
     print(cratelist)
 
