@@ -44,25 +44,35 @@ def parseRowToInstruct(row: str) -> Instruct | None:
         return None
 
     return Instruct(
-        amount=int(-1 + inputInstruct[0]),
-        crate=int(-1 + inputInstruct[1]),
-        move_to=int(inputInstruct[2]),
+        amount=int(inputInstruct[0]),
+        crate=int(-1 + int(inputInstruct[1])),
+        move_to=int(-1 + int(inputInstruct[2])),
     )
 
 
 for row in instructions:
-
     instruct: Instruct | None = parseRowToInstruct(row)
 
     if instruct is not None:
         print("row: " + row)
-        print("amount: " + str(Instruct.amount))
-        print("crate: " + str(Instruct.crate))
-        for i in range(Instruct.amount):
-            item_to_move = cratelist[Instruct.crate].pop()
-            cratelist[Instruct.move_to].insert(0, item_to_move)
+        print("amount: " + str(instruct.amount))
+        print("crate: " + str(instruct.crate))
+        print("move_to: " + str(instruct.move_to))
+        print("which crate: " + str(cratelist[instruct.crate]))
+        print("crate to move: " + str(cratelist[instruct.move_to][0]))
+        print("crates remaining: " + str(cratelist[instruct.crate]))
+        for i in range(instruct.amount):
+            if cratelist[instruct.crate]:
+                item_to_move = cratelist[instruct.crate].pop()
+                cratelist[instruct.move_to].insert(0, item_to_move)
+            else:
+                print(f"Not enough items in crate {instruct.crate} to move.")
+                break
+    # print(cratelist)
 
-    print(cratelist)
+coolList: list = []
+for i in range(8):
+    item_to_move = cratelist[i].pop()
+    coolList[i].insert(0, item_to_move)
 
-
-# print(cratelist[0][0])
+print(coolList)
