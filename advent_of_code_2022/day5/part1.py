@@ -1,5 +1,5 @@
 import re
-import pydantic
+from pydantic import BaseModel
 
 with open("input.txt", "r+") as f:
     lines = f.readlines()
@@ -32,19 +32,22 @@ for row in crates:
 print(cratelist)
 
 
-class Instruct:
-    def __init__(self) -> None:
-        self.amount: int = 0
-        self.crate: int = 0
-        self.move_to: int = 0
+class Instruct(BaseModel):
+    amount: int
+    crate: int
+    move_to: int
 
-    def process(self, row):
-        inputInstruct = re.findall(r"\d+", row)
-        if inputInstruct:
-            # using i for instruction because these are python preserved words
-            self.amount = int(inputInstruct[0])
-            self.crate = int(inputInstruct[1])
-            self.move_to = int(inputInstruct[2])
+
+def parseRowToInstruct(row: str) -> Instruct | None:
+    inputInstruct = re.findall(r"\d+", row)
+    if not inputInstruct:
+        return None
+
+    return Instruct(
+        amount=int(-1 + inputInstruct[0]),
+        crate=int(-1 + inputInstruct[1]),
+        move_to=int(inputInstruct[2]),
+    )
 
 
 for row in instructions:
