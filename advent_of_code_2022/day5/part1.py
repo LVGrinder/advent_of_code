@@ -1,3 +1,5 @@
+import re
+
 with open("input.txt", "r+") as f:
     lines = f.readlines()
 
@@ -7,10 +9,14 @@ instructions = lines[9:]
 
 # print(instructions)
 
-cratelist = []
-crategroup = 1
+cratelist: list[list[str]] = []
+crategroup = int(1)
+
 for _ in range(9):
     cratelist.append([])
+
+movement = int(-1)
+
 for row in crates:
     # print(row)
     # row = row.split()
@@ -23,3 +29,21 @@ for row in crates:
             cratelist[i // 4].append(row[i + 1])
     # print(cratelist)
 print(cratelist)
+
+
+class instruct:
+    def process(self, row):
+        inputInstruct = re.findall(r"\d+", row)
+        if instructions:
+            # using i for instruction because these are python preserved words
+            self.crate = int(inputInstruct[0])
+            self.move_from = int(inputInstruct[1])
+            self.move_to = int(inputInstruct[2])
+
+
+for row in instructions:
+    instruct().process(row)
+    crate = int(-1 + instruct().crate)
+
+
+# print(cratelist[0][0])
