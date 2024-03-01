@@ -1,4 +1,5 @@
 import re
+import pydantic
 
 with open("input.txt", "r+") as f:
     lines = f.readlines()
@@ -31,19 +32,36 @@ for row in crates:
 print(cratelist)
 
 
-class instruct:
+class Instruct:
+    def __init__(self) -> None:
+        self.amount: int = 0
+        self.crate: int = 0
+        self.move_to: int = 0
+
     def process(self, row):
         inputInstruct = re.findall(r"\d+", row)
-        if instructions:
+        if inputInstruct:
             # using i for instruction because these are python preserved words
-            self.crate = int(inputInstruct[0])
-            self.move_from = int(inputInstruct[1])
+            self.amount = int(inputInstruct[0])
+            self.crate = int(inputInstruct[1])
             self.move_to = int(inputInstruct[2])
 
 
 for row in instructions:
-    instruct().process(row)
-    crate = int(-1 + instruct().crate)
+    print("row: " + row)
+    instruct = Instruct()
+    instruct.process(row)
+    amount = int(-1 + instruct.amount)
+    crate = int(-1 + instruct.crate)
+
+    print("amount: " + str(amount))
+
+    print("crate: " + str(crate))
+    for i in range(amount):
+        item_to_move = cratelist[crate].pop()
+        cratelist[instruct.move_to].insert(0, item_to_move)
+
+    print(cratelist)
 
 
 # print(cratelist[0][0])
