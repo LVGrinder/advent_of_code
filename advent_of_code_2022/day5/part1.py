@@ -1,24 +1,22 @@
 import re
+import os
 from pydantic import BaseModel
+from pathlib import Path
 
-with open("input.txt", "r+") as f:
+with open(Path(os.getcwd(), "advent_of_code_2022", "day5", "example.txt"), "r+") as f:
     lines = f.readlines()
 
-crates = lines[:8]
+crates = lines[:3]
 
-instructions = lines[9:]
+instructions = lines[5:]
 
 # print(instructions)
 
-cratelist: list[list[str]] = []
-coollist: list[list[str]] = []
-crategroup = int(1)
+stackamount: int = 3
 
-for _ in range(9):
-    cratelist.append([])
-    coollist.append([])
+stacks: list[list[str]] = [[] for _ in range(stackamount)]
 
-movement = int(-1)
+movement = -1
 
 for row in crates:
     # print(row)
@@ -29,9 +27,11 @@ for row in crates:
         if row[i + 1] == " ":
             break
         else:
-            cratelist[i // 4].append(row[i + 1])
+            print(row)
+            stacks[i // 4].append(row[i + 1])
     # print(cratelist)
-print(cratelist)
+print("Here is cratelist:")
+print(stacks)
 
 
 class Instruct(BaseModel):
@@ -41,14 +41,15 @@ class Instruct(BaseModel):
 
 
 def parseRowToInstruct(row: str) -> Instruct | None:
-    inputInstruct = re.findall(r"\d+", row)
+    inputInstruct: list[str] = re.findall(r"\d+", row)
+    print("inputInstruct" + str(inputInstruct))
     if not inputInstruct:
         return None
 
     return Instruct(
         amount=int(inputInstruct[0]),
-        crate=int(-1 + int(inputInstruct[1])),
-        move_to=int(-1 + int(inputInstruct[2])),
+        crate=-1 + int(inputInstruct[1]),
+        move_to=-1 + int(inputInstruct[2]),
     )
 
 
@@ -60,28 +61,31 @@ for row in instructions:
         print("amount: " + str(instruct.amount))
         print("crate: " + str(instruct.crate))
         print("move_to: " + str(instruct.move_to))
-        print("which crate: " + str(cratelist[instruct.crate]))
-        print("crate to move: " + str(cratelist[instruct.move_to]))
+        print("which crate: " + str(stacks[instruct.crate]))
+        print("crate to move: " + str(stacks[instruct.move_to]))
         for i in range(instruct.amount):
-            if cratelist[instruct.crate]:
-                item_to_move = cratelist[instruct.crate].pop()
+            if stacks[instruct.crate]:
+                item_to_move = stacks[instruct.crate].pop()
                 # cratelist[instruct.move_to].insert(1, item_to_move)
-                cratelist[instruct.move_to].append(item_to_move)
-                print(cratelist[instruct.move_to])
+                stacks[instruct.move_to].append(item_to_move)
+                print(stacks[instruct.move_to])
             else:
                 print(f"Not enough items in crate {instruct.crate} to move.")
                 break
-        print("crates remaining: " + str(cratelist[instruct.crate]))
+        print("crates remaining: " + str(stacks[instruct.crate]))
     # print(cratelist)
 
-print(cratelist)
+print(stacks)
+
+output: list[list[str]] = [[] for _ in range(stackamount)]
+
 for i in range(8):
-    if cratelist[i]:
-        item_to_move = cratelist[i].pop()
-        coollist[i].append(item_to_move)
+    if stacks[i]:
+        item_to_move = stacks[i].pop()
+        output[i].append(item_to_move)
     else:
         print("Not enough items in crate to move.")
 
 # print(cratelist)
 print("Here is the cool list:")
-print(coollist)
+print(output)
