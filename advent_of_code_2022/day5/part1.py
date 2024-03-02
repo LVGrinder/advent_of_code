@@ -7,6 +7,7 @@ with open(Path(os.getcwd(), "advent_of_code_2022", "day5", "example.txt"), "r+")
     lines = f.readlines()
 
 crates = lines[:3]
+print(crates)
 
 instructions = lines[5:]
 
@@ -25,9 +26,10 @@ for row in crates:
     for i in range(0, len(row), 4):
         # print(row[i + 1])
         if row[i + 1] == " ":
-            break
+            print("skipping as empty")
         else:
             print(row)
+            print("putting to stack" + str(stacks))
             stacks[i // 4].append(row[i + 1])
     # print(cratelist)
 print("Here is cratelist:")
@@ -57,6 +59,8 @@ for row in instructions:
     instruct: Instruct | None = parseRowToInstruct(row)
 
     if instruct is not None:
+        for stack in stacks:
+            print(stack)
         print("row: " + row)
         print("amount: " + str(instruct.amount))
         print("crate: " + str(instruct.crate))
@@ -79,7 +83,7 @@ print(stacks)
 
 output: list[list[str]] = [[] for _ in range(stackamount)]
 
-for i in range(8):
+for i in range(stackamount):
     if stacks[i]:
         item_to_move = stacks[i].pop()
         output[i].append(item_to_move)
