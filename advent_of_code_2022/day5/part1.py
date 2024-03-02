@@ -11,10 +11,12 @@ instructions = lines[9:]
 # print(instructions)
 
 cratelist: list[list[str]] = []
+coollist: list[list[str]] = []
 crategroup = int(1)
 
 for _ in range(9):
     cratelist.append([])
+    coollist.append([])
 
 movement = int(-1)
 
@@ -59,20 +61,27 @@ for row in instructions:
         print("crate: " + str(instruct.crate))
         print("move_to: " + str(instruct.move_to))
         print("which crate: " + str(cratelist[instruct.crate]))
-        print("crate to move: " + str(cratelist[instruct.move_to][0]))
-        print("crates remaining: " + str(cratelist[instruct.crate]))
+        print("crate to move: " + str(cratelist[instruct.move_to]))
         for i in range(instruct.amount):
             if cratelist[instruct.crate]:
                 item_to_move = cratelist[instruct.crate].pop()
-                cratelist[instruct.move_to].insert(0, item_to_move)
+                # cratelist[instruct.move_to].insert(1, item_to_move)
+                cratelist[instruct.move_to].append(item_to_move)
+                print(cratelist[instruct.move_to])
             else:
                 print(f"Not enough items in crate {instruct.crate} to move.")
                 break
+        print("crates remaining: " + str(cratelist[instruct.crate]))
     # print(cratelist)
 
-coolList: list = []
+print(cratelist)
 for i in range(8):
-    item_to_move = cratelist[i].pop()
-    coolList[i].insert(0, item_to_move)
+    if cratelist[i]:
+        item_to_move = cratelist[i].pop()
+        coollist[i].append(item_to_move)
+    else:
+        print("Not enough items in crate to move.")
 
-print(coolList)
+# print(cratelist)
+print("Here is the cool list:")
+print(coollist)
