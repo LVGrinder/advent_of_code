@@ -65,13 +65,13 @@ for row in instructions:
         print("amount: " + str(instruct.amount))
         print("crate: " + str(instruct.crate))
         print("move_to: " + str(instruct.move_to))
-        print("which crate: " + str(stacks[instruct.crate]))
+        print("which crate: " + str(stacks[instruct.crate][0]))
         print("crate to move: " + str(stacks[instruct.move_to]))
         for i in range(instruct.amount):
             if stacks[instruct.crate]:
-                item_to_move = stacks[instruct.crate].pop()
+                item_to_move = stacks[instruct.crate].pop(0)
                 # cratelist[instruct.move_to].insert(1, item_to_move)
-                stacks[instruct.move_to].append(item_to_move)
+                stacks[instruct.move_to].insert(0, item_to_move)
                 print(stacks[instruct.move_to])
             else:
                 print(f"Not enough items in crate {instruct.crate} to move.")
@@ -85,7 +85,7 @@ output: list[list[str]] = [[] for _ in range(stackamount)]
 
 for i in range(stackamount):
     if stacks[i]:
-        item_to_move = stacks[i].pop()
+        item_to_move = stacks[i].pop(0)
         output[i].append(item_to_move)
     else:
         print("Not enough items in crate to move.")
