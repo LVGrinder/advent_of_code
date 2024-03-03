@@ -1,5 +1,6 @@
 import re
 import os
+from queue import LifoQueue, Queue
 from pydantic import BaseModel
 from pathlib import Path
 
@@ -55,12 +56,14 @@ def parseRowToInstruct(row: str) -> Instruct | None:
     )
 
 
+queue = LifoQueue()
+
 for row in instructions:
     instruct: Instruct | None = parseRowToInstruct(row)
 
     if instruct is not None:
         for stack in stacks:
-            print(stack)
+            print(f"Stack: {stack}")
         print("row: " + row)
         print("amount: " + str(instruct.amount))
         print("crate: " + str(instruct.crate))
@@ -71,11 +74,14 @@ for row in instructions:
             if stacks[instruct.crate]:
                 item_to_move = stacks[instruct.crate].pop(0)
                 # cratelist[instruct.move_to].insert(1, item_to_move)
-                stacks[instruct.move_to].insert(0, item_to_move)
+                queue.put(item_to_move)
                 print(stacks[instruct.move_to])
             else:
                 print(f"Not enough items in crate {instruct.crate} to move.")
                 break
+        for i in range(instruct.amount):
+            stacks[instruct.move_to].insert(0, queue.get())
+
         print("crates remaining: " + str(stacks[instruct.crate]))
     # print(cratelist)
 
