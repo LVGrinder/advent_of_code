@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-with open(Path(os.getcwd(), "advent_of_code_2022", "day6", "example.txt"), "r+") as f:
+with open(Path(os.getcwd(), "advent_of_code_2022", "day6", "input.txt"), "r+") as f:
     lines = f.readlines()
 
 databuffer: str = lines[0]
