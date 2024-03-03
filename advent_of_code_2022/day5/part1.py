@@ -1,19 +1,20 @@
 import re
 import os
+import queue
 from pydantic import BaseModel
 from pathlib import Path
 
-with open(Path(os.getcwd(), "advent_of_code_2022", "day5", "example.txt"), "r+") as f:
+with open(Path(os.getcwd(), "advent_of_code_2022", "day5", "input.txt"), "r+") as f:
     lines = f.readlines()
 
-crates = lines[:3]
+crates = lines[:8]
 print(crates)
 
-instructions = lines[5:]
+instructions = lines[9:]
 
 # print(instructions)
 
-stackamount: int = 3
+stackamount: int = 9
 
 stacks: list[list[str]] = [[] for _ in range(stackamount)]
 
@@ -60,7 +61,7 @@ for row in instructions:
 
     if instruct is not None:
         for stack in stacks:
-            print(stack)
+            print(f"Stack: {stack}")
         print("row: " + row)
         print("amount: " + str(instruct.amount))
         print("crate: " + str(instruct.crate))
