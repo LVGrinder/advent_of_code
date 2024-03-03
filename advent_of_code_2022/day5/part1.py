@@ -1,6 +1,6 @@
 import re
 import os
-from queue import LifoQueue, Queue
+from queue import Queue
 from pydantic import BaseModel
 from pathlib import Path
 
