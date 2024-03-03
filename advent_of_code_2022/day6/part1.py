@@ -27,12 +27,20 @@ for i in range(len(databuffer)):
 
     print(matchlist)
     times_checked: int = 0
+    amount_not_matched: int = 0
     for letter in matchlist:
         secondarylist = matchlist
         secondarylist.pop(times_checked)
         print(f"current letter being checked: {letter}")
         print(f"current existing list: {secondarylist}")
+        for matchable_letter in secondarylist:
+            if letter != matchable_letter:
+                print("was not matched with any")
+                amount_not_matched = +1
         times_checked = +1
+    if amount_not_matched == 12:
+        print(f"we got it bois {i}")
+        break
 
     #     if letter == letter and letter:
     #         print(f"found: {packet}")
