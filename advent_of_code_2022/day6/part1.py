@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-with open(Path(os.getcwd(), "advent_of_code_2022", "day6", "input.txt"), "r+") as f:
+with open(Path(os.getcwd(), "advent_of_code_2022", "day6", "example.txt"), "r+") as f:
     lines = f.readlines()
 
 databuffer: str = lines[0]
@@ -34,23 +34,23 @@ for i in range(len(databuffer)):
     # print(f"secondarylist out of loop: {matchinglist}")
     print(f"constantlist out of loop: {constantlist}")
 
-    amount_not_matched: int = 0
-    for letter in bufferlist:
+    amount_not_matched = 0
+    times_checked = 0
+    for letter in constantlist:
         print(f"constantlist inside of loop: {constantlist}")
         matchinglist = list(constantlist)
+        print(f"letter being popped: {matchinglist[times_checked]}")
         matchinglist.pop(times_checked)
-        # print(f"matchlist: {matchinglist}")
         print(f"current letter being checked: {letter}")
         print(f"current existing list: {matchinglist}")
         for matchable_letter in matchinglist:
             if letter != matchable_letter:
-                print("was not matched with any")
-                amount_not_matched = +1
-        times_checked = +1
-    if times_checked == 3:
-        times_checked: int = 0
+                print(f"{letter} was not matched with {matchable_letter}")
+                amount_not_matched += 1
+        times_checked += 1
     if amount_not_matched == 12:
-        print(f"we got it bois {i}")
+        value = i + 4
+        print(f"marked detected at character {value}")
         break
 
     #     if letter == letter and letter:
