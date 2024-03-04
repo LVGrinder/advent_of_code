@@ -1,5 +1,4 @@
 import os
-from typing import Any
 from pathlib import Path
 from pydantic import BaseModel
 
@@ -15,10 +14,10 @@ class File(BaseModel):
 
 
 class Folder(BaseModel):
-    contents: dict[str, Any]
+    contents: dict[str, "Folder | File"]
     name: str
 
-    def add_item(self, item: Any):
+    def add_item(self, item: "Folder | File"):
         self.contents[item.name] = item
 
     def get_size(self):
@@ -33,23 +32,29 @@ class Folder(BaseModel):
 
 Folder.model_rebuild
 
-for line in lines:
-    line = line.replace("$ ", "")
-    parts = line.split()
-    print(f"this is line: {line}\nthis is parts: {parts}\n")
+# Initialize root folder and folder stack
+root_folder = Folder(name="root", contents={})
+current_folder = root_folder
+folder_stack = [root_folder]
 
-# folder = Folder().folder
-#
-# for line in lines:
-#     line = line.replace("\n", "")
-#     for existingfolder in folder:
-#         if line[:4] == existingfolder:
-#             break
-#     if line[:4] == "$ cd" and line[5] != ".":
-#         folder.append(line[5:])
-#         print(line)
-#     if line[:4] == "dir ":
-#         folder.append(line[5:])
-#         print(line)
-#
-# print(folder)
+for line in lines:
+    line = line.strip()  # Remove leading and trailing whitespace
+    if not line:
+        continue
+    parts = line.split()
+    if parts[0] == "dir":
+        folder_name = parts[1]
+        new_folder = Folder(name=folder_name, contents={"Folder | File"})
+        current_folder.add_item(new_folder)
+    elif parts[0] == "cd":
+        folder_name = parts[1]
+        if folder_name == "..":
+            folder_stack.pop()
+            current_folder = folder_stack[-1]
+        else:
+            current_folder = current_folder.contents[folder_name]
+            folder_stack.append(current_folder)
+    else:
+        size, name = parts[0], parts[1]
+        file = File(name=name, size=int(size))
+        current_folder.add_item(file)
