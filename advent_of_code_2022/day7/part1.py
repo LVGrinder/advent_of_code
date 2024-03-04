@@ -1,5 +1,5 @@
 import os
-from typing import Union
+from typing import Any
 from pathlib import Path
 from pydantic import BaseModel
 
@@ -15,10 +15,10 @@ class File(BaseModel):
 
 
 class Folder(BaseModel):
-    contents: dict[str, Union[File, "Folder"]]
+    contents: dict[str, Any]
     name: str
 
-    def add_item(self, item: Union[File, "Folder"]):
+    def add_item(self, item: Any):
         self.contents[item.name] = item
 
     def get_size(self):
