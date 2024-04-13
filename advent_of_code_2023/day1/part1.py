@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 
-with open(Path(os.getcwd(), "advent_of_code_2023", "day1", "example.txt"), "r+") as f:
+with open(Path(os.getcwd(), "advent_of_code_2023", "day1", "input.txt"), "r+") as f:
     lines = f.readlines()
 
 calibration_sum: list[int] = []
@@ -19,7 +19,7 @@ for line in lines:
         number: int = int(string)
         print(number)
         calibration_sum.append(number)
-        break
+        continue
 
     # value: list[str] = two_digit
     # calibration_value: int = int(value)
