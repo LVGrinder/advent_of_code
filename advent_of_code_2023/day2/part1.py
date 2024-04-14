@@ -2,7 +2,7 @@ import os
 import re
 from pathlib import Path
 
-with open(Path(os.getcwd(), "advent_of_code_2023", "day2", "example.txt"), "r+") as f:
+with open(Path(os.getcwd(), "advent_of_code_2023", "day2", "input.txt"), "r+") as f:
     lines = f.readlines()
 
 id: int = 0
@@ -26,17 +26,17 @@ for game in lines:
         print(number_of_cubes)
         if cube[1] == "red":
             print("red")
-            if number_of_cubes >= 12:
+            if number_of_cubes > 12:
                 print(f"invalid: {number_of_cubes}")
                 invalid_amount += 1
         if cube[1] == "green":
             print("green")
-            if number_of_cubes >= 13:
+            if number_of_cubes > 13:
                 print(f"invalid: {number_of_cubes}")
                 invalid_amount += 1
         if cube[1] == "blue":
             print("blue")
-            if number_of_cubes >= 14:
+            if number_of_cubes > 14:
                 print(f"invalid: {number_of_cubes}")
                 invalid_amount += 1
         if invalid_amount >= 1:
