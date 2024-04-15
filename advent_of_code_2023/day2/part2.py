@@ -5,22 +5,26 @@ from pathlib import Path
 with open(Path(os.getcwd(), "advent_of_code_2023", "day2", "example.txt"), "r+") as f:
     lines = f.readlines()
 
-id: int = 0
-invalid_amount: int = 0
-sum_id: int = 0
+power: int = 0
+sum_power: int = 0
 
-red_list: list[str] = []
-green_list: list[str] = []
-blue_list: list[str] = []
+red_list: list[int] = []
+green_list: list[int] = []
+blue_list: list[int] = []
 
+red_power: int
+green_power: int
+blue_power: int
 
 for game in lines:
     # print(line)
 
-    id += 1
-    sum_id += id
     color: list[str] = re.findall(r"(\d+\s[a-z]+)", game)
     print(color)
+
+    red_list = []
+    green_list = []
+    blue_list = []
 
     for cube in color:
         print(cube)
@@ -31,24 +35,21 @@ for game in lines:
         print(number_of_cubes)
         if cube[1] == "red":
             print("red")
-            if number_of_cubes > 12:
-                print(f"invalid: {number_of_cubes}")
-                invalid_amount += 1
+            red_list.append(number_of_cubes)
         if cube[1] == "green":
             print("green")
-            if number_of_cubes > 13:
-                print(f"invalid: {number_of_cubes}")
-                invalid_amount += 1
+            green_list.append(number_of_cubes)
         if cube[1] == "blue":
             print("blue")
-            if number_of_cubes > 14:
-                print(f"invalid: {number_of_cubes}")
-                invalid_amount += 1
-        if invalid_amount >= 1:
-            sum_id -= id
-            invalid_amount = 0
-            break
+            blue_list.append(number_of_cubes)
+    red_power = max(red_list)
+    green_power = max(green_list)
+    blue_power = max(blue_list)
+    print("red power: ", red_power)
+    print("red_list: ", red_list)
+
+    power = red_power * green_power * blue_power
+    sum_power += power
 
 
-print(invalid_amount)
-print(f"Sum of ID is: {sum_id}")
+print(f"Sum of ID is: {sum_power}")
